@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EcdBeneficiaryResource\Pages;
+use App\Filament\Resources\EcdBeneficiaryResource\Widgets\EcdWidget;
 use App\Models\EcdBeneficiary;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -71,6 +72,13 @@ class EcdBeneficiaryResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            EcdWidget::class,
+        ];
     }
 
     public static function getRelations(): array
