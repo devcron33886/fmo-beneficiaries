@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\FruitTreesBeneficiaryResource\Pages;
 use App\Models\FruitTreesBeneficiary;
+use App\Models\Project;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -20,19 +21,12 @@ class FruitTreesBeneficiaryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required(),
-                Forms\Components\TextInput::make('gender'),
-                Forms\Components\TextInput::make('id_number'),
-                Forms\Components\TextInput::make('sector'),
-                Forms\Components\TextInput::make('cell'),
-                Forms\Components\TextInput::make('village'),
-                Forms\Components\TextInput::make('avocado'),
-                Forms\Components\TextInput::make('mangoes'),
-                Forms\Components\TextInput::make('oranges'),
-                Forms\Components\TextInput::make('papaya'),
-                Forms\Components\TextInput::make('telephone')
-                    ->tel(),
+                Forms\Components\Section::make('Beneficiary Informations')
+                    ->schema(static::getBeneficiaryInformations())
+                    ->columns(2),
+                Forms\Components\Section::make('Project Details')
+                    ->schema(static::getBeneficiaryDetails())
+                    ->columns(2),
             ]);
     }
 
@@ -91,5 +85,38 @@ class FruitTreesBeneficiaryResource extends Resource
             'view' => Pages\ViewFruitTreesBeneficiary::route('/{record}'),
             'edit' => Pages\EditFruitTreesBeneficiary::route('/{record}/edit'),
         ];
+    }
+
+    public static function getBeneficiaryInformations(): array
+    {
+        return [
+            Forms\Components\Select::make('project_id')
+                ->label('Project Name')
+                ->options(Project::all()->pluck('name', 'id'))
+                ->searchable()
+                ->native(false),
+            Forms\Components\TextInput::make('name')
+                ->required(),
+            Forms\Components\TextInput::make('gender'),
+            Forms\Components\TextInput::make('id_number'),
+            Forms\Components\TextInput::make('sector'),
+            Forms\Components\TextInput::make('cell'),
+            Forms\Components\TextInput::make('village'),
+            Forms\Components\TextInput::make('telephone')
+                ->tel(),
+        ];
+    }
+
+    public static function getBeneficiaryDetails(): array
+    {
+        return [
+
+            Forms\Components\TextInput::make('avocado'),
+            Forms\Components\TextInput::make('mangoes'),
+            Forms\Components\TextInput::make('oranges'),
+            Forms\Components\TextInput::make('papaya'),
+
+        ];
+
     }
 }

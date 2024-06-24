@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('fruit_trees_beneficiaries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id')->nullable()->constrained();
             $table->string('name');
             $table->string('gender')->nullable();
             $table->string('id_number')->nullable();

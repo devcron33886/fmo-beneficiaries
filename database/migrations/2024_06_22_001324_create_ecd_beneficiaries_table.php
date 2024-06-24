@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ecd_beneficiaries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id')->nullable()->constrained();
             $table->string('name');
             $table->string('grade');
             $table->string('gender')->nullable();

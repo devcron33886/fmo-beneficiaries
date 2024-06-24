@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MvtcBeneficiaryResource\Pages;
 use App\Models\MvtcBeneficiary;
+use App\Models\Project;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -22,22 +23,12 @@ class MvtcBeneficiaryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('reg_number'),
-                Forms\Components\TextInput::make('name')
-                    ->required(),
-                Forms\Components\TextInput::make('gender'),
-                Forms\Components\DatePicker::make('dob'),
-                Forms\Components\TextInput::make('residence_district'),
-                Forms\Components\TextInput::make('sector'),
-                Forms\Components\TextInput::make('cell'),
-                Forms\Components\TextInput::make('village'),
-                Forms\Components\TextInput::make('student_id_number'),
-                Forms\Components\TextInput::make('student_number'),
-                Forms\Components\TextInput::make('education_level'),
-                Forms\Components\TextInput::make('trade'),
-                Forms\Components\TextInput::make('payment_mode'),
-                Forms\Components\TextInput::make('intake'),
-                Forms\Components\TextInput::make('graduation_date'),
+                Forms\Components\Section::make('Beneficiary Informations')
+                    ->schema(static::getBeneficiaryInformations())
+                    ->columns(2),
+                Forms\Components\Section::make('Beneficiary Details')
+                    ->schema(static::getBeneficiaryDetails())
+                    ->columns(2),
             ]);
     }
 
@@ -101,5 +92,40 @@ class MvtcBeneficiaryResource extends Resource
             'view' => Pages\ViewMvtcBeneficiary::route('/{record}'),
             'edit' => Pages\EditMvtcBeneficiary::route('/{record}/edit'),
         ];
+    }
+
+    public static function getBeneficiaryInformations(): array
+    {
+        return [
+            Forms\Components\Select::make('project_id')
+                ->label('Project Name')
+                ->options(Project::all()->pluck('name', 'id'))
+                ->searchable()
+                ->native(false),
+            Forms\Components\TextInput::make('reg_number'),
+            Forms\Components\TextInput::make('name')
+                ->required(),
+            Forms\Components\TextInput::make('gender'),
+            Forms\Components\DatePicker::make('dob'),
+            Forms\Components\TextInput::make('student_id_number'),
+            Forms\Components\TextInput::make('student_number'),
+            Forms\Components\TextInput::make('education_level'),
+            Forms\Components\TextInput::make('trade'),
+        ];
+    }
+
+    public static function getBeneficiaryDetails(): array
+    {
+        return [
+            Forms\Components\TextInput::make('residence_district'),
+            Forms\Components\TextInput::make('sector'),
+            Forms\Components\TextInput::make('cell'),
+            Forms\Components\TextInput::make('village'),
+            Forms\Components\TextInput::make('payment_mode'),
+            Forms\Components\TextInput::make('intake'),
+            Forms\Components\TextInput::make('graduation_date'),
+
+        ];
+
     }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('microcredit_beneficiaries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id')->nullable()->constrained();
             $table->string('vsla_name')->nullable();
             $table->string('name');
             $table->string('gender')->nullable();

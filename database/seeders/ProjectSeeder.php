@@ -37,9 +37,7 @@ class ProjectSeeder extends Seeder
             [
                 'name' => 'Microcredit',
             ],
-            [
-                'name' => 'VSLA',
-            ],
+
             [
                 'name' => 'Toolkits',
             ],
