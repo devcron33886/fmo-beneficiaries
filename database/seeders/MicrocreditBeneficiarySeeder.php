@@ -18,15 +18,16 @@ class MicrocreditBeneficiarySeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ',')) !== false) {
             if (! $firstline) {
                 DB::table('microcredit_beneficiaries')->insert([
-                    'vsla_name' => $data[0],
-                    'name' => $data[1],
-                    'gender' => $data[2],
-                    'id_number' => $data[3],
-                    'sector' => $data[4],
-                    'cell' => $data[5],
-                    'village' => $data[6],
-                    'requested_loan' => $data[7],
-                    'approved_loan' => $data[8],
+                    'project_id' => $data[0],
+                    'vsla_name' => $data[1],
+                    'name' => $data[2],
+                    'gender' => $data[3],
+                    'id_number' => $data[4],
+                    'sector' => $data[5],
+                    'cell' => $data[6],
+                    'village' => $data[7],
+                    'requested_loan' => $data[8],
+                    'approved_loan' => $data[9],
                 ]);
             }
             $firstline = false;

@@ -17,17 +17,18 @@ class FruitTreesBeneficiarySeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ',')) !== false) {
             if (! $firstline) {
                 DB::table('fruit_trees_beneficiaries')->insert([
-                    'name' => $data['0'],
-                    'gender' => $data['1'],
-                    'id_number' => $data['2'],
-                    'sector' => $data['3'],
+                    'project_id' => $data[0],
+                    'name' => $data['1'],
+                    'gender' => $data['2'],
+                    'id_number' => $data['3'],
+                    'sector' => $data['4'],
                     'cell' => $data['4'],
-                    'village' => $data['5'],
-                    'avocado' => $data['6'],
-                    'mangoes' => $data['7'],
-                    'oranges' => $data['8'],
-                    'papaya' => $data['9'],
-                    'telephone' => $data['10'],
+                    'village' => $data['6'],
+                    'avocado' => $data['7'],
+                    'mangoes' => $data['8'],
+                    'oranges' => $data['9'],
+                    'papaya' => $data['10'],
+                    'telephone' => $data['11'],
 
                 ]);
 

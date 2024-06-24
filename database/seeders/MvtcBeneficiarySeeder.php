@@ -18,21 +18,22 @@ class MvtcBeneficiarySeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ',')) !== false) {
             if (! $firstline) {
                 DB::table('mvtc_beneficiaries')->insert([
-                    'reg_number' => $data[0],
-                    'name' => $data[1],
-                    'gender' => $data[2],
-                    'dob' => $data[3],
-                    'residence_district' => $data[4],
-                    'sector' => $data[5],
-                    'cell' => $data[6],
-                    'village' => $data[7],
-                    'student_id_number' => $data[8],
-                    'student_number' => $data[9],
-                    'education_level' => $data[10],
-                    'trade' => $data[11],
-                    'payment_mode' => $data[12],
-                    'intake' => $data[13],
-                    'graduation_date' => $data[14],
+                    'project_id' => $data[0],
+                    'reg_number' => $data[1],
+                    'name' => $data[2],
+                    'gender' => $data[3],
+                    'dob' => $data[4],
+                    'residence_district' => $data[5],
+                    'sector' => $data[6],
+                    'cell' => $data[7],
+                    'village' => $data[8],
+                    'student_id_number' => $data[9],
+                    'student_number' => $data[10],
+                    'education_level' => $data[11],
+                    'trade' => $data[12],
+                    'payment_mode' => $data[13],
+                    'intake' => $data[14],
+                    'graduation_date' => $data[15],
                 ]);
             }
             $firstline = false;

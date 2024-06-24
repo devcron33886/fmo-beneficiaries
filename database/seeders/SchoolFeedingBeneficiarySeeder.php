@@ -18,21 +18,22 @@ class SchoolFeedingBeneficiarySeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ',')) !== false) {
             if (! $firstline) {
                 DB::table('school_feeding_beneficiaries')->insert([
-                    'name' => $data[0],
-                    'grade' => $data[1],
-                    'gender' => $data[2],
-                    'school_name' => $data[3],
-                    'trimester' => $data[4],
-                    'school_phone' => $data[5],
-                    'district' => $data[6],
-                    'academic_year' => $data[7],
-                    'sector' => $data[8],
-                    'cell' => $data[9],
-                    'village' => $data[10],
-                    'father_name' => $data[11],
-                    'mother_name' => $data[12],
-                    'home_phone' => $data[13],
-                    'status' => $data[14],
+                    'project_id' => $data[0],
+                    'name' => $data[1],
+                    'grade' => $data[2],
+                    'gender' => $data[3],
+                    'school_name' => $data[4],
+                    'trimester' => $data[5],
+                    'school_phone' => $data[6],
+                    'district' => $data[7],
+                    'academic_year' => $data[8],
+                    'sector' => $data[9],
+                    'cell' => $data[10],
+                    'village' => $data[11],
+                    'father_name' => $data[12],
+                    'mother_name' => $data[13],
+                    'home_phone' => $data[14],
+                    'status' => $data[15],
                 ]);
             }
             $firstline = false;

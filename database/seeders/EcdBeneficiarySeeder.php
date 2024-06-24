@@ -18,17 +18,18 @@ class EcdBeneficiarySeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ',')) !== false) {
             if (! $firstline) {
                 DB::table('ecd_beneficiaries')->insert([
-                    'name' => $data[0],
-                    'grade' => $data[1],
-                    'gender' => $data[2],
-                    'academic_year' => $data[3],
-                    'father_name' => $data[4],
-                    'father_id' => $data[5],
-                    'mother_name' => $data[6],
-                    'home_phone' => $data[7],
-                    'sector' => $data[8],
-                    'cell' => $data[9],
-                    'village' => $data[10],
+                    'project_id' => $data[0],
+                    'name' => $data[1],
+                    'grade' => $data[2],
+                    'gender' => $data[3],
+                    'academic_year' => $data[4],
+                    'father_name' => $data[5],
+                    'father_id' => $data[6],
+                    'mother_name' => $data[7],
+                    'home_phone' => $data[8],
+                    'sector' => $data[9],
+                    'cell' => $data[10],
+                    'village' => $data[11],
                 ]);
             }
             $firstline = false;

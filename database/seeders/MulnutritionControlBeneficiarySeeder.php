@@ -18,20 +18,21 @@ class MulnutritionControlBeneficiarySeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ',')) !== false) {
             if (! $firstline) {
                 DB::table('mulnutrition_control_beneficiaries')->insert([
-                    'name' => $data[0],
-                    'gender' => $data[1],
-                    'age_or_months' => $data[2],
-                    'associated_health_center' => $data[3],
-                    'sector' => $data[4],
-                    'cell' => $data[5],
-                    'village' => $data[6],
-                    'father_name' => $data[7],
-                    'mother_name' => $data[8],
-                    'home_tel' => $data[9],
-                    'package_reception_date' => $data[10],
-                    'entry_muac' => $data[11],
-                    'current_muac' => $data[12],
-                    'nutrition_status' => $data[13],
+                    'project_id' => $data[0],
+                    'name' => $data[1],
+                    'gender' => $data[2],
+                    'age_or_months' => $data[3],
+                    'associated_health_center' => $data[4],
+                    'sector' => $data[5],
+                    'cell' => $data[6],
+                    'village' => $data[7],
+                    'father_name' => $data[8],
+                    'mother_name' => $data[9],
+                    'home_tel' => $data[10],
+                    'package_reception_date' => $data[11],
+                    'entry_muac' => $data[12],
+                    'current_muac' => $data[13],
+                    'nutrition_status' => $data[14],
                 ]);
             }
             $firstline = false;
