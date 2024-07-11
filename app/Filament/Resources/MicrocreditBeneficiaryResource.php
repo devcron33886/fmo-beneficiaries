@@ -15,7 +15,9 @@ class MicrocreditBeneficiaryResource extends Resource
 {
     protected static ?string $model = MicrocreditBeneficiary::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+
+    protected static ?string $navigationLabel = 'Microcredit';
 
     public static function form(Form $form): Form
     {

@@ -15,7 +15,9 @@ class SchoolFeedingBeneficiaryResource extends Resource
 {
     protected static ?string $model = SchoolFeedingBeneficiary::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+
+    protected static ?string $navigationLabel = 'School Feeding';
 
     public static function form(Form $form): Form
     {

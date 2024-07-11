@@ -2,22 +2,30 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\GenderEnum;
+use App\Enums\GradeEnum;
+use App\Enums\StatusEnum;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use App\Filament\Resources\EcdBeneficiaryResource\Pages;
 use App\Filament\Resources\EcdBeneficiaryResource\Widgets\EcdWidget;
 use App\Models\EcdBeneficiary;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class EcdBeneficiaryResource extends Resource
 {
     protected static ?string $model = EcdBeneficiary::class;
 
+    protected static ?string $navigationLabel = 'ECD';
+
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form
     {
@@ -40,12 +48,19 @@ class EcdBeneficiaryResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('grade')
+                    ->badge()
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('gender')
+                    ->sortable()
+                    ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('academic_year')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->sortable()
+                    ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -61,14 +76,26 @@ class EcdBeneficiaryResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options(StatusEnum::class),
+                SelectFilter::make('gender')
+                    ->options(GenderEnum::class),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make()
+                        ->label('Edit Beneficiary'),
+                    Tables\Actions\DeleteAction::make()
+                        ->requiresConfirmation()
+                        ->action(fn () => $this->EcdBeneficiary->delete())
+                        ->label('Delete Beneficiary'),
+                ]),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make()
+                    ->label('Export to Excel'),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
@@ -103,14 +130,19 @@ class EcdBeneficiaryResource extends Resource
         return [
             Forms\Components\TextInput::make('name')
                 ->required(),
-            Forms\Components\TextInput::make('grade')
+            Select::make('grade')
+                ->options(GradeEnum::class)
                 ->required(),
-            Forms\Components\TextInput::make('gender'),
+            Select::make('gender')
+                ->options(GenderEnum::class),
             Forms\Components\TextInput::make('academic_year')
                 ->required(),
             Forms\Components\TextInput::make('home_phone')
                 ->tel(),
-            Forms\Components\TextInput::make('status'),
+            Select::make('status')
+                ->label('Student status')
+                ->placeholder('what is student status?')
+                ->options(StatusEnum::class),
         ];
     }
 

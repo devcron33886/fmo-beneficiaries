@@ -15,7 +15,9 @@ class FruitTreesBeneficiaryResource extends Resource
 {
     protected static ?string $model = FruitTreesBeneficiary::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Fruits Trees';
+
+    protected static ?string $navigationIcon = 'heroicon-o-globe-europe-africa';
 
     public static function form(Form $form): Form
     {

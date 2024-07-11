@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectResource\Pages;
+use App\Filament\Resources\ProjectResource\RelationManagers\EcdBeneficiariesRelationManager;
+use App\Filament\Resources\ProjectResource\RelationManagers\TreesRelationManager;
 use App\Models\Project;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -16,7 +18,7 @@ class ProjectResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-vertical';
 
     public static function form(Form $form): Form
     {
@@ -64,7 +66,8 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            EcdBeneficiariesRelationManager::class,
+            TreesRelationManager::class,
         ];
     }
 
